@@ -1,21 +1,26 @@
-﻿#include <iostream>
+﻿
 #include <vector>
 #include <algorithm>
+#include <iostream>
 
 //шаблон
 template <class T>
 T to_square(T a) {
     return a * a;
 };
-//специализация для вектора
-template<>
-std::vector<int> to_square(std::vector<int> vec) {
-    std::transform(vec.begin(), vec.end(), vec.begin(), to_square<int>);
+
+template<class U>
+std::vector<U> to_square(std::vector<U> vec) {
+    //std::transform(vec.begin(), vec.end(), vec.begin(), to_square<U>);
+    for (auto &x : vec) {
+        x = to_square(x);
+    }
     return vec;
 };
 
-//печатает int вектор
-void print_vector(std::vector<int> vec) {
+template <class T>
+//печатает вектор
+void print_vector(std::vector<T> vec) {
     for (auto x : vec) {
         std::cout << x << " ";
     }
